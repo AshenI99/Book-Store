@@ -15,10 +15,21 @@ export const getBooksList=()=>{
 } 
 
 
-export const saveBook=()=>{
+export const saveNewBook=(data)=>{
 
 	return new Promise((resolve, reject) => {
-		axios.post(`${baseURL}books`)
+		axios.post(`${baseURL}books`, data)
+			.then((data)=>{
+				resolve(data.data);
+			})
+			.catch((e)=> reject(e))
+	})
+} 
+
+export const updateBook=(data, id)=>{
+
+	return new Promise((resolve, reject) => {
+		axios.put(`${baseURL}books/${id}`, data)
 			.then((data)=>{
 				resolve(data.data);
 			})

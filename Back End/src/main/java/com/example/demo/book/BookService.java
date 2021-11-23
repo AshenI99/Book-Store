@@ -28,7 +28,16 @@ public class BookService {
     }
 
     public List<Book> getBooks(){
-        return bookRepository.findAll();
+        List<Book> books = bookRepository.findAll();
+        for (int i = 0; i < books.size(); i++) {
+            Book tempBook = books.get(i);
+            if(tempBook.getInvoicePath() != null){
+                tempBook.setInvoicePath(tempBook.getInvoicePath().toString().substring(10));
+                books.set(i, tempBook);
+            }
+        }
+        return books;
+
     }
 
     public void saveBook(Book book){
@@ -67,7 +76,14 @@ public class BookService {
     }
 
     public Book getBook(Long id){
-        return bookRepository.getById(id);
+        Book book = bookRepository.findById(id).get();
+
+        if(book.getInvoicePath() != null && !"".equals(book.getInvoicePath())){
+            book.setInvoicePath(book.getInvoicePath().toString().substring(10));
+
+        }
+
+        return book;
     }
 
     public String uploadInvoice(MultipartFile file){

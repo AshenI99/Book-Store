@@ -26,8 +26,8 @@ const BookTable=(props)=>{
 	  	formatter: (rowContent, row) => {
     		return (
     			<div className='text-primary icons'>
-    				<span><AiFillEdit onClick={()=> props.onEditClick(row)}/></span>
-    				<span><MdDelete onClick={()=> props.onDeleteClick(row.id)}/></span>
+    				<span onClick={()=> props.onEditClick(row)}><AiFillEdit /></span>
+    				<span onClick={()=> props.onDeleteClick(row.id)}><MdDelete/></span>
     			</div>
     		)
         }
