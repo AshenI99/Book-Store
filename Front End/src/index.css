@@ -1,0 +1,12 @@
+.icons span{
+	background: rgba(128,128,128,0.2);
+	padding: 0 5px 5px;
+	line-height: 0;
+	margin-right: 5px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.icons span:last-child svg{
+	fill: red;
+}
