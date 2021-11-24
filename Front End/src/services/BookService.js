@@ -14,6 +14,17 @@ export const getBooksList=()=>{
 	})
 } 
 
+export const getBookById=(id)=>{
+
+	return new Promise((resolve, reject) => {
+		axios.get(`${baseURL}books/${id}`)
+			.then((data)=>{
+				resolve(data.data);
+			})
+			.catch((e)=> reject(e))
+	})
+} 
+
 
 export const saveNewBook=(data)=>{
 

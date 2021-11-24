@@ -10,3 +10,11 @@
 .icons span:last-child svg{
 	fill: red;
 }
+
+.detail-row div{
+	display: flex;
+	justify-content: space-between;
+	max-width: 300px;
+	margin: auto;
+	margin-top: 10px;
+}
