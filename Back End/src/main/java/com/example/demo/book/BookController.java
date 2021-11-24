@@ -1,9 +1,19 @@
 package com.example.demo.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @CrossOrigin
@@ -21,6 +31,11 @@ public class BookController {
     @GetMapping
     public List<Book> getBooks(){
         return bookService.getBooks();
+    }
+
+    @GetMapping(path = "{bookId}")
+    public Book getBookById(@PathVariable("bookId") Long id){
+        return bookService.getBook(id);
     }
 
     @PostMapping
@@ -50,7 +65,7 @@ public class BookController {
 
     @PutMapping(path = "{bookId}")
     public Book updateBook(
-            @PathVariable(required = false, name = "bookId") Long id,
+            @PathVariable("bookId") Long id,
             @RequestParam(required = false, name = "invoice")MultipartFile file,
             @RequestParam(required = false, name = "bookName") String bookName,
             @RequestParam(required = false, name = "author") String author,
@@ -86,4 +101,32 @@ public class BookController {
         return id;
     }
 
+    @GetMapping(path = "invoice/{fileName}")
+    public ResponseEntity getInvoice(@PathVariable("fileName") String fileName, HttpServletRequest request){
+
+        Path path = Paths.get("/upload", fileName);
+        Resource resource = null;
+        String contentType = null;
+
+        try {
+            resource = new UrlResource(path.toUri());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException e) {
+            System.out.print("Could not determine file type.");
+        }
+
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
 }
