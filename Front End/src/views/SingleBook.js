@@ -15,13 +15,16 @@ const SingleBook=(props)=>{
 	const [singleBook, setSingleBook] = useState({})
 	const [invoicePath, setInvoicePath] = useState(false);
 
-	useEffect(async()=>{
-		try{
-	      const Data = await getBookById(params.bookId);
-	      setSingleBook(Data)
-	    } catch(err){
-	      console.log(err)
-	    }
+	useEffect(()=>{
+		async function fetchData() {
+			try{
+		      const Data = await getBookById(params.bookId);
+		      setSingleBook(Data)
+		    } catch(err){
+		      console.log(err)
+		    }
+		}
+		fetchData();
 	},[])
 
 	const toggleModal=()=>{

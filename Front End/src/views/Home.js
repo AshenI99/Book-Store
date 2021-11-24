@@ -22,13 +22,16 @@ const Home=()=>{
   const [deleteId, setDeleteId] = useState();
 
 
-  useEffect(async()=>{
-    try{
-      const Data = await getBooksList();
-      setBooks(Data)
-    } catch(err){
-      console.log(err)
-    }
+  useEffect(()=>{
+  	async function fetchData() {
+	    try{
+	      const Data = await getBooksList();
+	      setBooks(Data)
+	    } catch(err){
+	      console.log(err)
+	    }
+	}
+    fetchData();
   },[])
 
   const toggleModal=()=>{
