@@ -167,6 +167,9 @@ h2{
 	box-shadow: none !important;
 }
 
+.react-bootstrap-table-pagination ul li, .react-bootstrap-table-pagination ul li .page-link{
+	box-shadow: none !important;
+}
 .react-bootstrap-table-pagination ul li:first-child{
 	border-radius: 5px 0 0 5px;
 }
