@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap'
 import BookTable from '../components/BookTable'
 import BookModal from '../components/BookModal'
 import DeleteModal from '../components/DeleteModal'
+import LoadingScreen from '../components/LoadingScreen'
 
 import { getBooksList, saveNewBook, deleteBookById, updateBook } from '../services/BookService'
 
@@ -20,17 +21,20 @@ const Home=()=>{
     price:''
   })
   const [deleteId, setDeleteId] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
 
   useEffect(()=>{
   	async function fetchData() {
 	    try{
 	      const Data = await getBooksList();
-	      setBooks(Data)
+	      setBooks(Data);
+        setIsLoading(false);
 	    } catch(err){
-	      console.log(err)
+	      console.log(err);
+        setIsLoading(false);
 	    }
-	}
+	  }
     fetchData();
   },[])
 
@@ -75,6 +79,7 @@ const Home=()=>{
   const onSaveClick= async(e)=>{
     toggleModal();
     e.preventDefault();
+    setIsLoading(true)
 
     let data = new FormData();
 
@@ -104,9 +109,11 @@ const Home=()=>{
           quantity:'',
           price:''
         });
+        setIsLoading(false)
 
       } catch(err){
         console.log(err)
+        setIsLoading(false)
       }
     }
     else{
@@ -120,9 +127,11 @@ const Home=()=>{
           quantity:'',
           price:''
         });
+        setIsLoading(false)
 
       } catch(err){
         console.log(err)
+        setIsLoading(false)
       }
     }
   }
@@ -145,6 +154,7 @@ const Home=()=>{
   }
 
   const deleteBook=async()=>{
+    setIsLoading(true)
     try{
       const Data = await deleteBookById(deleteId);
       
@@ -152,9 +162,11 @@ const Home=()=>{
       newData = newData.filter((el)=> el.id !== Data)
       setBooks(newData);
       setDeleteId();
+      setIsLoading(false);
 
     } catch(err){
       console.log(err)
+      setIsLoading(false);
     }
   }
 
@@ -162,6 +174,9 @@ const Home=()=>{
 
   return (
     <div className="container">
+
+      <div className='text-center mt-5 mb-3'><h2>Available Books</h2></div>
+
       <div className='text-end mt-3 mb-3'><Button onClick={toggleModal}>Add New Book</Button></div>
       
       <BookTable 
@@ -186,6 +201,7 @@ const Home=()=>{
         deleteBook={deleteBook}
       />
 
+      <LoadingScreen isLoading={isLoading} />
     </div>
   );
 }

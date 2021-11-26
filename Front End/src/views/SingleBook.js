@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Button } from 'react-bootstrap'
 
 import InvoiceModal from '../components/InvoiceModal'
+import LoadingScreen from '../components/LoadingScreen'
 
 import { getBookById } from '../services/BookService'
 
@@ -14,14 +15,17 @@ const SingleBook=(props)=>{
 
 	const [singleBook, setSingleBook] = useState({})
 	const [invoicePath, setInvoicePath] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(()=>{
 		async function fetchData() {
 			try{
 		      const Data = await getBookById(params.bookId);
 		      setSingleBook(Data)
+		      setIsLoading(false)
 		    } catch(err){
 		      console.log(err)
+		      setIsLoading(false)
 		    }
 		}
 		fetchData();
@@ -37,7 +41,7 @@ const SingleBook=(props)=>{
 	return(
 		<>
 			<div className='text-center'>
-				<h5>{singleBook.bookName}</h5>
+      			<div className='text-center mt-5 mb-5'><h2>{singleBook.bookName}</h2></div>
 
 				<div className='detail-row'>
 					<div>
@@ -68,6 +72,8 @@ const SingleBook=(props)=>{
 				toggleModal={toggleModal}
 				invoice={invoicePath}
 			/>
+
+			<LoadingScreen isLoading={isLoading} />
 		</>
 	)
 }

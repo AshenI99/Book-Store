@@ -24,8 +24,8 @@ const BookTable=(props)=>{
 	  },{
 	  	dataField:'actions',
 	  	text:'Actions',
-	  	headerStyle:{width:'80px'},
-	  	style:{maxWidth:80,textAlign:'center'},
+	  	headerStyle:{width:'110px'},
+	  	style:{maxWidth:110,textAlign:'center'},
 	  	formatter: (rowContent, row) => {
     		return (
     			<div className='text-primary icons'>
@@ -51,9 +51,7 @@ const BookTable=(props)=>{
     		data={ props.books } 
     		columns={ columns } 
     		rowEvents={ rowEvents }
-    		striped
-  			hover
-  			condensed
+  			bordered={ false }
      	/>
 	)
 }

@@ -5,7 +5,7 @@ const DeleteModal=(props)=>{
 
 	return(
 		<Modal show={props.isOpen} onHide={props.toggleModal}>
-			<Modal.Header style={{color:'red'}}><h5>Delete Book</h5></Modal.Header>
+			<Modal.Header style={{color:'#c30101'}}><h5>Delete Book</h5></Modal.Header>
 
 			<Modal.Body>
 				<div>Are you sure you want to delete this book?</div>

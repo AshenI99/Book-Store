@@ -35,7 +35,7 @@ const BookModal=(props)=>{
 					<Form.Group className='mt-3' controlId="bookInvoice">
 						<Form.Label>Invoice</Form.Label>
 						<div className='d-flex'>
-							<Form.Control style={{maxWidth:107, borderRadius:'5px 0 0 5px'}} type="file" name="invoice" onChange={props.onChangeHandlerFile} required={props.formState.id ? false : true}/>
+							<Form.Control style={{maxWidth:107, borderRadius:'5px 0 0 5px'}} type="file" accept=".pdf, .png, .jpg, .jpeg" name="invoice" onChange={props.onChangeHandlerFile} required={props.formState.id ? false : true}/>
 							<div className='form-control' style={{borderLeft:'none', borderRadius:'0 5px 5px 0'}}>{(props.formState.invoice && props.formState.invoice.name) ? props.formState.invoice.name : props.formState.invoice}</div>
 						</div>
 					</Form.Group>					
