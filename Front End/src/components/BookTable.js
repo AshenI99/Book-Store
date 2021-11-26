@@ -1,5 +1,6 @@
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import { MdDelete } from 'react-icons/md'
 import { AiFillEdit } from 'react-icons/ai'
 import { useNavigate } from "react-router-dom";
@@ -37,6 +38,25 @@ const BookTable=(props)=>{
 	  }
 	];
 
+	const options = {
+	  pageStartIndex: 1,
+	  alwaysShowAllBtns: true, // Always show next and previous button
+	  withFirstAndLast: false, // Hide the going to First and Last page button
+	  hideSizePerPage: true, // Hide the sizePerPage dropdown always
+	  hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
+	  firstPageText: 'First',
+	  prePageText: 'Back',
+	  nextPageText: 'Next',
+	  lastPageText: 'Last',
+	  nextPageTitle: 'First page',
+	  prePageTitle: 'Pre page',
+	  firstPageTitle: 'Next page',
+	  lastPageTitle: 'Last page',
+	  showTotal: false,
+	  disablePageTitle: true,
+	  sizePerPage:5
+	};
+
 	const rowEvents = {
 	  onClick: (e, row, rowIndex) => {
 	  	if(!e.target.children.length && e.target.nodeName !== 'path'){
@@ -52,6 +72,7 @@ const BookTable=(props)=>{
     		columns={ columns } 
     		rowEvents={ rowEvents }
   			bordered={ false }
+  			pagination={ paginationFactory(options) }
      	/>
 	)
 }

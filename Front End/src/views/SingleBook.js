@@ -4,6 +4,8 @@ import { Button } from 'react-bootstrap'
 
 import InvoiceModal from '../components/InvoiceModal'
 import LoadingScreen from '../components/LoadingScreen'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 import { getBookById } from '../services/BookService'
 
@@ -39,9 +41,10 @@ const SingleBook=(props)=>{
   	}
 
 	return(
-		<>
-			<div className='text-center'>
-      			<div className='text-center mt-5 mb-5'><h2>{singleBook.bookName}</h2></div>
+		<>	
+			<Header />
+			<div className='text-center main-view'>
+      			<div className='text-center pt-0 pb-4'><h2>{singleBook.bookName}</h2></div>
 
 				<div className='detail-row'>
 					<div>
@@ -60,7 +63,7 @@ const SingleBook=(props)=>{
 						<span>Quantity: </span>
 						<span>{singleBook.quantity}</span>
 					</div>
-					<div>
+					<div className='mt-4'>
 						<Button onClick={toggleModal} style={{width:'100%'}}>View Invoice</Button>
 					</div>
 				</div>
@@ -74,6 +77,7 @@ const SingleBook=(props)=>{
 			/>
 
 			<LoadingScreen isLoading={isLoading} />
+			<Footer />
 		</>
 	)
 }

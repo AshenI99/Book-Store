@@ -5,6 +5,8 @@ import BookTable from '../components/BookTable'
 import BookModal from '../components/BookModal'
 import DeleteModal from '../components/DeleteModal'
 import LoadingScreen from '../components/LoadingScreen'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 import { getBooksList, saveNewBook, deleteBookById, updateBook } from '../services/BookService'
 
@@ -173,11 +175,13 @@ const Home=()=>{
   // console.log(books);
 
   return (
-    <div className="container">
+    <>
+    <Header/>
+    <div className="container main-view">
 
-      <div className='text-center mt-5 mb-3'><h2>Available Books</h2></div>
+      <div className='text-center pt-0'><h2>Available Books</h2></div>
 
-      <div className='text-end mt-3 mb-3'><Button onClick={toggleModal}>Add New Book</Button></div>
+      <div className='text-end mt-0 mb-2'><Button onClick={toggleModal}>Add a new book</Button></div>
       
       <BookTable 
         books={books} 
@@ -202,7 +206,10 @@ const Home=()=>{
       />
 
       <LoadingScreen isLoading={isLoading} />
+
     </div>
+    <Footer/>
+    </>
   );
 }
 

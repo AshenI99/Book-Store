@@ -1,6 +1,10 @@
+*{
+	font-family:'Josefin Sans', sans-serif;
+}
+
 .icons span{
 	background: rgba(128,128,128,0.2);
-	padding: 0 5px 5px;
+	padding: 5px 5px;
 	line-height: 0;
 	margin-right: 5px;
 	border-radius: 10px;
@@ -14,18 +18,26 @@
 	fill: #0f52ba;
 }
 
+.detail-row {
+	border-radius: 12px;
+	background: rgba(0, 0, 0, 0.075);
+	max-width: 500px;
+	margin: auto;
+	padding: 20px;
+}
 .detail-row div{
 	display: flex;
-	max-width: 300px;
-	margin: auto;
-	margin-top: 10px;
 }
 .detail-row div span:first-child{
 	font-weight: 600;
-	width: 150px;
 	text-align: left;
 }
 
+.detail-row div span{
+	width: 300px;
+	padding: 10px 20px;
+	font-size: 17px;
+}
 
 table{
 	border-collapse: collapse;
@@ -105,9 +117,63 @@ h2{
 
 
 .pdf-viewer{
-	max-height: 65vh;
+	max-height: 68vh;
 	overflow-y: auto;
 }
 .pdf-viewer canvas{
 	margin: auto;
+}
+
+
+.header{
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 80px;
+	width: 100%;
+	background-color: #fff;
+    box-shadow: 0 0 0 0.1rem rgba(128, 128, 128,0.5) !important;
+}
+.header img{
+	margin-left: 2rem;
+}
+.footer{
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	height: 50px;
+	width: 100%;
+	background-color: #fff;
+    box-shadow: 0 0 0 0.1rem rgba(128, 128, 128,0.5) !important;
+}
+.footer div{
+	margin: 15px;
+	font-size: 14px;
+}
+
+.main-view{
+	margin-top: 105px;
+	margin-bottom: 80px !important;
+}
+
+
+.react-bootstrap-table-pagination .page-item, .react-bootstrap-table-pagination .page-item .page-link{
+	color: rgba(54, 48, 74,1) !important
+}
+.react-bootstrap-table-pagination .active, .react-bootstrap-table-pagination .active .page-link{
+	background: rgba(54, 48, 74,1) !important;
+	color: #fff !important;
+	border:none;
+	box-shadow: none !important;
+}
+
+.react-bootstrap-table-pagination ul li:first-child{
+	border-radius: 5px 0 0 5px;
+}
+.react-bootstrap-table-pagination ul li:last-child{
+	border-radius: 0 5px 5px 0;
+}
+
+.react-bootstrap-table-pagination .pagination{
+	justify-content: end;
 }
